@@ -1,6 +1,8 @@
 
 CREATE OR REPLACE PACKAGE pos_pkg AS
 
+  v_total_emp NUMBER;
+
   PROCEDURE add_customer (p_name IN VARCHAR2, p_gender IN CHAR, p_customer_no OUT NUMBER);
   PROCEDURE create_invoice (p_employee_no IN NUMBER, p_customer_no IN NUMBER, p_invoice_no OUT NUMBER);
   PROCEDURE add_invoice_item (p_invoice_no IN NUMBER, p_item_no IN NUMBER, p_quantity IN NUMBER);
@@ -189,5 +191,7 @@ CREATE OR REPLACE PACKAGE BODY pos_pkg AS
     RETURN v_total;
   END get_branch_sales;
 
+BEGIN
+  SELECT COUNT(*) INTO v_total_emp FROM Employee;
 END pos_pkg;
 /
